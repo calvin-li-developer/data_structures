@@ -1,20 +1,20 @@
 """
 -------------------------------------------------------
-hash_set_array.py
+hash_set_sorted.py
 [program description]
 -------------------------------------------------------
 Author:  Chang Xing (Calvin) Li
 ID:      161574090
 Email:   lixx4090@mylaurier.ca
-__updated__ = "2017-11-14"
+__updated__ = "2017-11-23"
 -------------------------------------------------------
 
 """
 # Imports
 # Use any appropriate data structure here.
-from list_array import List
+from sorted_list_array import SortedList
 # Define the new_slot slot creation function.
-new_slot = List
+new_slot = SortedList
 
 # Constants
 SEP = '-' * 40
@@ -128,7 +128,7 @@ class HashSet:
         else:
             inserted = True
         
-            slot.insert(0, value)
+            slot.insert(value)
             self._count += 1
         
             if self._count > HashSet._LOAD_FACTOR * self._size:
@@ -197,7 +197,7 @@ class HashSet:
             while not temp_slot.is_empty():
                 value = temp_slot.pop(0)
                 slot = self._find_slot(value)
-                slot.insert(0, value)
+                slot.insert(value)
         return
 
     def debug(self):
