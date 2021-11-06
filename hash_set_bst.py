@@ -1,6 +1,6 @@
 """
 -------------------------------------------------------
-hash_set_sorted.py
+hash_set_bst.py
 [program description]
 -------------------------------------------------------
 Author:  Chang Xing (Calvin) Li
@@ -12,9 +12,9 @@ __updated__ = "2017-11-23"
 """
 # Imports
 # Use any appropriate data structure here.
-from sorted_list_array import SortedList
+from bst_linked import BST
 # Define the new_slot slot creation function.
-new_slot = SortedList
+new_slot = BST
 
 # Constants
 SEP = '-' * 40
@@ -120,19 +120,15 @@ class HashSet:
         """
 
         # your code here
-        inserted = True
         slot = self._find_slot(value)
         
-        if value in slot:
-            inserted = False
-        else:
-            inserted = True
-        
-            slot.insert(value)
+       
+        inserted = slot.insert(value)
+        if inserted:
             self._count += 1
         
-            if self._count > HashSet._LOAD_FACTOR * self._size:
-                self._rehash()
+        if self._count > HashSet._LOAD_FACTOR * self._size:
+            self._rehash()
 
         return inserted
 
@@ -188,14 +184,15 @@ class HashSet:
         self._size = (self._size*2) + 1
         self._slots = []
         i = 0
-        
+         
         while i < self._size:
             self._slots.append(new_slot())
             i += 1
         while len(temp) > 0:
             temp_slot = temp.pop(0)
-            while not temp_slot.is_empty():
-                value = temp_slot.pop(0)
+            temp_slot_list = temp_slot.inorder()
+            while len(temp_slot_list) != 0:
+                value = temp_slot_list.pop(0)
                 slot = self._find_slot(value)
                 slot.insert(value)
         return
