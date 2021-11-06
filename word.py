@@ -1,99 +1,115 @@
 """
 -------------------------------------------------------
-Letter.py
+word.py
 [program description]
 -------------------------------------------------------
 Author:  Chang Xing (Calvin) Li
 ID:      161574090
 Email:   lixx4090@mylaurier.ca
-__updated__ = "2017-11-16"
+__updated__ = "2017-11-23"
 -------------------------------------------------------
 
 """
-class Letter:
+class Word:
 
-    def __init__(self, letter):
+    def __init__(self, word):
         """
         -------------------------------------------------------
-        Initialize a Letter object.
-        Use: l = Letter(char)
+        Initialize a Word object.
+        Use: l = Word(char)
         -------------------------------------------------------
         Preconditions:
-            letter - an single uppercase letter of the alphabet (str)
+            word - an single uppercase word of the alphabet (str)
         Postconditions:
-            Letter values are set.
+            Word values are set.
         -------------------------------------------------------
         """
-        assert letter.isalpha() and letter.isupper(), "Invalid letter"
+        assert word.isalpha() and word.islower(), "Invalid word"
 
-        self.letter = letter
-        self.count = 0
+        self.word = word
         self.comparisons = 0
         return
 
     def __str__(self):
         """
         -------------------------------------------------------
-        Creates a formatted string of Letter data.
+        Creates a formatted string of Word data.
         Use: print(m)
         Use: s = str(m)
         -------------------------------------------------------
         Postconditions:
             returns:
-            the value of self.letter (str)
+            the value of self.word (str)
         -------------------------------------------------------
         """
-        return "{}: {}, {}".format(self.letter, self.count, self.comparisons)
+        return "{}: {:,d}".format(self.word, self.comparisons)
 
     def __eq__(self, rs):
         """
         -------------------------------------------------------
-        Compares this Letter against another Letter for equality.
+        Compares this Word against another Word for equality.
         Use: l == rs
         -------------------------------------------------------
         Preconditions:
-            rs - [right side] Letter to compare to (Letter)
+            rs - [right side] Word to compare to (Word)
         Postconditions:
             returns:
             result - True if name and origin match, False otherwise (boolean)
         -------------------------------------------------------
         """
-        self.count += 1
         self.comparisons += 1
-        result = self.letter == rs.letter
+        result = self.word == rs.word
         return result
 
     def __lt__(self, rs):
         """
         -------------------------------------------------------
-        Determines if this Letter comes before another.
+        Determines if this Word comes before another.
         Use: f < rs
         -------------------------------------------------------
         Preconditions:
-            rs - [right side] Letter to compare to (Letter)
+            rs - [right side] Word to compare to (Word)
         Postconditions:
             returns:
-            result - True if Letter precedes rs, False otherwise (boolean)
+            result - True if Word precedes rs, False otherwise (boolean)
         -------------------------------------------------------
         """
         self.comparisons += 1
-        result = self.letter < rs.letter
+        result = self.word < rs.word
         return result
 
     def __le__(self, rs):
         """
         -------------------------------------------------------
-        Determines if this Letter precedes or is or equal to another.
+        Determines if this Word precedes or is or equal to another.
         Use: f <= rs
         -------------------------------------------------------
         Preconditions:
-            rs - [right side] Letter to compare to (Letter)
+            rs - [right side] Word to compare to (Word)
         Postconditions:
             returns:
-            result - True if this Letter precedes or is equal to rs,
+            result - True if this Word precedes or is equal to rs,
               False otherwise (boolean)
         -------------------------------------------------------
         """
         self.comparisons += 1
-        result = self.letter <= rs.letter
+        result = self.word <= rs.word
         return result
+
+    def __hash__(self):
+        """
+        -------------------------------------------------------
+        Generates a hash value from a word.
+        Use: h = hash(word)
+        -------------------------------------------------------
+        Postconditions:
+            returns
+            value - the total of the characters in the name string
+                multiplied by the year (int > 0)
+        -------------------------------------------------------
+        """
+        value = 0
+
+        for c in self.word:
+            value += ord(c)
+        return value
