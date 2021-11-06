@@ -139,10 +139,10 @@ class Stack:
 
         while not len(self._values) == 0:
             value = self._values.pop()
-            s2._values.append(value)
+            s2._values.push(value)
             if not len(self._values) == 0:
                 value = self._values.pop()
-                s3._values.append(value)
+                s3._values.push(value)
 
         return s2, s3
 
